@@ -730,12 +730,16 @@
  * @section caselight
  * M355 Case Light on-off / brightness
  */
-#if ENABLED(KNUTWURST_4MAXP2)
+#if EITHER(KNUTWURST_MEGA_P, KNUTWURST_4MAXP2)
   #define CASE_LIGHT_ENABLE
 #endif
 
 #if ENABLED(CASE_LIGHT_ENABLE)
-  #define CASE_LIGHT_PIN 45                   // Override the default pin if needed
+  #if ENABLED(KNUTWURST_4MAXP2)
+    #define CASE_LIGHT_PIN 45                 // Override the default pin if needed
+  #else
+    #define CASE_LIGHT_PIN  6
+  #endif
   #define INVERT_CASE_LIGHT false             // Set true if Case Light is ON when pin is LOW
   #define CASE_LIGHT_DEFAULT_ON true          // Set default power-up state on
   #define CASE_LIGHT_DEFAULT_BRIGHTNESS 255   // Set default power-up brightness (0-255, requires PWM pin)
